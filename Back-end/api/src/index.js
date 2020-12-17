@@ -25,7 +25,7 @@ app.use((req, res, next) => {
     next();
 });
 
-// app.use("/", require("./routes/routes"));
+app.use("/", require("./routes/routes"));
 
 
 app.listen(port, () => {
