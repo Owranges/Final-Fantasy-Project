@@ -10,6 +10,7 @@ const verif_token = require("../middleware/token");
 
 // ADD AN USER SIGNUP
 router.post("/user/sign-up", (req, res) => {
+  try {
     let admin = 0;
     let verif = `SELECT email FROM utilisateurs WHERE email = '${req.body.email}';`;
     con.query(verif, (err, result) => {
@@ -26,11 +27,15 @@ router.post("/user/sign-up", (req, res) => {
             });
         }
     });
+  } 
+  catch (error) {
+    res.status(203).send(error)
+  }
 });
 
 // LOGIN USER
 router.post("/user/login", (req,res) => {
-
+  try {
     let password = req.body.password
     let sql = `SELECT * FROM utilisateurs WHERE email = '${req.body.email}';`;
     con.query(sql, (err, result) => {
@@ -57,10 +62,14 @@ router.post("/user/login", (req,res) => {
       });
     }
   });
+  } catch (error) {
+    res.status(203).send(error)
+  } 
 });
 
 // EDIT PROFIL USER
 router.put("/user/edit/:id", (req, res) => {
+  try {
     let prenom = req.body.prenom;
     let email = req.body.email;
     let password = req.body.password;
@@ -86,10 +95,15 @@ router.put("/user/edit/:id", (req, res) => {
         });
       }
     });
-  });
+  } 
+  catch (error) {
+    res.status(203).send(error)
+  }    
+});
 
 // DELETE USER ACCOUNT
 router.delete("/user/:id", (req,res) => {
+  try {
     let id = req.params.id;
 
     let sql = `DELETE FROM utilisateurs WHERE utilisateurs.id = '${id}'`;
@@ -100,10 +114,13 @@ router.delete("/user/:id", (req,res) => {
       }
 
     });
+  } catch (error) {
+      res.status(203).send(error)
+  }   
 })
 
 // CREATE SUBJECT
-router.post("/subject/create", (req,res) => {
+router.post("/subject/create",verif_token, (req,res) => {
   try {
     let id = req.body.idUser;
     let contained = req.body.contenu;
@@ -115,21 +132,18 @@ router.post("/subject/create", (req,res) => {
         res.status(200).send("Subject well inserted");
     });
   } catch (error) {
-    res.status(203).send(error)
-  }
-    
+      res.status(203).send(error)
+  }  
 });
 //CREATE CATEGORY SUBJECT
-router.post("/subject/category", (req,res) => {
+router.post("/subject/category",verif_token, (req,res) => {
   try {
     if(!req.body.idAdmin) throw "please provide idAdmin"
     if(!req.body.nom || req.body.nom == "") throw "please provide a nom"
     let idAdmin = req.body.idAdmin;
     let checkAdmin = `SELECT id,administ FROM utilisateurs WHERE id = '${idAdmin}';`;
     con.query(checkAdmin, (err,result) => {
-      // console.log(result[0].administ);
       if (err) throw err;
-      
       else if(result[0].administ == 1){
         let sql = `INSERT INTO catégories_sujet (nom) VALUES('${req.body.nom}')`;
 
@@ -141,11 +155,9 @@ router.post("/subject/category", (req,res) => {
         res.status(200).send("Ur not an admin user")
       }
     })
-   
   } catch (error) {
-    res.status(203).send(error)
-  }
-    
+      res.status(203).send(error)
+  }  
 });
 module.exports = router;
 
