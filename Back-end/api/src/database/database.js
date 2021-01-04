@@ -18,7 +18,8 @@ function createTableUser() {
         prenom VARCHAR(255)NOT NULL,
         pseudo VARCHAR(255)NOT NULL,
         password VARCHAR(255)NOT NULL,
-        avatar VARCHAR(255)NOT NULL
+        avatar VARCHAR(255)NOT NULL,
+        administ BOOLEAN
     )`;
 
     con.query(myTable, (err, results, fields) => {
