@@ -103,27 +103,34 @@ router.delete("/user/:id", (req,res) => {
 })
 
 // CREATE SUBJECT
-router.post("/subject/create/:idUser&:idCategorySubject", (req,res) => {
-
-    let idUser = req.params.id_utilisateur;
-    let date = req.body.date;
+router.post("/subject/create", (req,res) => {
+  try {
+    let id = req.body.idUser;
     let contained = req.body.contenu;
-    let idCategorySubject = req.params.id_category_sujet;
+    let idSubject = req.body.idCategorySubject;
 
-    let sql = `INSERT INTO sujet_forum (id_utilisateur, date, contenu, id_catégories_sujet) VALUES('${idUser}','${date}','${contained}','${idCategorySubject}');`;
+    let sql = `INSERT INTO sujet_forum (id_utilisateur, date, contenu, id_catégories_sujet) VALUES('${id}',NOW(),'${contained}','${idSubject}');`;
     con.query(sql, (err, result) => {
         if (err) throw err;
         res.status(200).send("Subject well inserted");
     });
+  } catch (error) {
+    res.status(203).send(error)
+  }
+    
 });
 //CREATE CATEGORY SUBJECT
-router.post("/subject/category/:idAdmin", (req,res) => {
-
-    let idAdmin = req.params.idAdmin;
+router.post("/subject/category", (req,res) => {
+  try {
+    if(!req.body.idAdmin) throw "please provide idAdmin"
+    if(!req.body.nom || req.body.nom == "") throw "please provide a nom"
+    let idAdmin = req.body.idAdmin;
     let checkAdmin = `SELECT id,administ FROM utilisateurs WHERE id = '${idAdmin}';`;
     con.query(checkAdmin, (err,result) => {
+      // console.log(result[0].administ);
       if (err) throw err;
-      else if (result.administ == 1){
+      
+      else if(result[0].administ == 1){
         let sql = `INSERT INTO catégories_sujet (nom) VALUES('${req.body.nom}')`;
 
         con.query(sql, (err, results) => {
@@ -135,6 +142,10 @@ router.post("/subject/category/:idAdmin", (req,res) => {
       }
     })
    
+  } catch (error) {
+    res.status(203).send(error)
+  }
+    
 });
 module.exports = router;
 
