@@ -14,61 +14,61 @@ router.post("/user/sign-up", (req, res) => {
     let admin = 0;
     let verif = `SELECT email FROM utilisateurs WHERE email = '${req.body.email}';`;
     con.query(verif, (err, result) => {
-        if (err) throw err;
-        if (result.length) {
-            res.status(200).send("This email is already in use");
-        } else {
-            bcrypt.hash(req.body.password, saltRounds).then((hashPassword) => {
-                let sql = `INSERT INTO utilisateurs (email, prenom, pseudo, password, avatar, administ) VALUES('${req.body.email}','${req.body.prenom}','${req.body.pseudo}','${hashPassword}','${req.body.avatar}','${admin}');`;
-                con.query(sql, (err, result) => {
-                    if (err) throw err;
-                    res.status(200).send("users well inserted");
-                });
-            });
-        }
+      if (err) throw err;
+      if (result.length) {
+        res.status(200).send("This email is already in use");
+      } else {
+        bcrypt.hash(req.body.password, saltRounds).then((hashPassword) => {
+          let sql = `INSERT INTO utilisateurs (email, prenom, pseudo, password, avatar, administ) VALUES('${req.body.email}','${req.body.prenom}','${req.body.pseudo}','${hashPassword}','${req.body.avatar}','${admin}');`;
+          con.query(sql, (err, result) => {
+            if (err) throw err;
+            res.status(200).send("users well inserted");
+          });
+        });
+      }
     });
-  } 
+  }
   catch (error) {
     res.status(203).send(error)
   }
 });
 
 // LOGIN USER
-router.post("/user/login", (req,res) => {
+router.post("/user/sign-in", (req, res) => {
   try {
     let password = req.body.password
     let sql = `SELECT * FROM utilisateurs WHERE email = '${req.body.email}';`;
     con.query(sql, (err, result) => {
-    if (err) throw err;
+      if (err) throw err;
 
-    if (!result.length) {
-      res.status(200).send("Email or Password is incorrect");
-    } else {
-      let token = jwt.sign(
-        {
+      if (!result.length) {
+        res.status(200).send("Email or Password is incorrect");
+      } else {
+        let token = jwt.sign(
+          {
             id: result[0].id,
             email: result[0].email,
             password: result[0].password,
-        },
-        "secret"
-      );
-      
-      bcrypt.compare(password, result[0].password).then((resp) => {
-        if (resp === true) {
-          res.status(200).send({ token, auth: true });
-        } else {
-          res.status(200).send("Email or Password is incorrect");
-        }
-      });
-    }
-  });
+          },
+          "secret"
+        );
+
+        bcrypt.compare(password, result[0].password).then((resp) => {
+          if (resp === true) {
+            res.status(200).send({ token, auth: true });
+          } else {
+            res.status(200).send("Email or Password is incorrect");
+          }
+        });
+      }
+    });
   } catch (error) {
     res.status(203).send(error)
-  } 
+  }
 });
 
 // EDIT PROFIL USER
-router.put("/user/edit/:id",verif_token, (req, res) => {
+router.put("/user/edit/:id", verif_token, (req, res) => {
   try {
     let prenom = req.body.prenom;
     let email = req.body.email;
@@ -76,11 +76,11 @@ router.put("/user/edit/:id",verif_token, (req, res) => {
     let avatar = req.body.avatar;
     let pseudo = req.body.pseudo;
     let id = req.params.id;
-  
+
     let check = `SELECT id FROM utilisateurs WHERE id = '${id}';`;
     con.query(check, (err, result) => {
       if (err) throw err;
-  
+
       if (!result.length) {
         res.status(200).send("This profil doesn't exist");
       } else {
@@ -95,14 +95,14 @@ router.put("/user/edit/:id",verif_token, (req, res) => {
         });
       }
     });
-  } 
+  }
   catch (error) {
     res.status(203).send(error)
-  }    
+  }
 });
 
 // DELETE USER ACCOUNT
-router.delete("/user/:id",verif_token, (req,res) => {
+router.delete("/user/:id", verif_token, (req, res) => {
   try {
     let id = req.params.id;
 
@@ -115,12 +115,12 @@ router.delete("/user/:id",verif_token, (req,res) => {
 
     });
   } catch (error) {
-      res.status(203).send(error)
-  }   
+    res.status(203).send(error)
+  }
 })
 
 // CREATE SUBJECT
-router.post("/subject/create",verif_token, (req,res) => {
+router.post("/subject/create", verif_token, (req, res) => {
   try {
     let id = req.body.id;
     let contained = req.body.contained;
@@ -128,40 +128,40 @@ router.post("/subject/create",verif_token, (req,res) => {
 
     let sql = `INSERT INTO sujet_forum (id_utilisateur, date, contenu, id_catégories_sujet) VALUES('${id}',NOW(),'${contained}','${idSubject}');`;
     con.query(sql, (err, result) => {
-        if (err) throw err;
-        res.status(200).send("Subject well inserted");
+      if (err) throw err;
+      res.status(200).send("Subject well inserted");
     });
   } catch (error) {
-      res.status(203).send(error)
-  }  
+    res.status(203).send(error)
+  }
 });
 //CREATE CATEGORY SUBJECT
-router.post("/subject/category",verif_token, (req,res) => {
+router.post("/subject/category", verif_token, (req, res) => {
   try {
-    if(!req.body.idAdmin) throw "please provide idAdmin"
-    if(!req.body.nom || req.body.nom == "") throw "please provide a nom"
+    if (!req.body.idAdmin) throw "please provide idAdmin"
+    if (!req.body.nom || req.body.nom == "") throw "please provide a nom"
     let id = req.body.idAdmin;
     let checkAdmin = `SELECT id,administ FROM utilisateurs WHERE id = '${id}';`;
-    con.query(checkAdmin, (err,result) => {
+    con.query(checkAdmin, (err, result) => {
       if (err) throw err;
-      else if(result[0].administ == 1){
+      else if (result[0].administ == 1) {
         let sql = `INSERT INTO catégories_sujet (nom) VALUES('${req.body.nom}')`;
 
         con.query(sql, (err, results) => {
-            if(err) throw err;
-            res.status(200).send("New category added")
+          if (err) throw err;
+          res.status(200).send("New category added")
         })
-      } else{
+      } else {
         res.status(200).send("Ur not an admin user")
       }
     })
   } catch (error) {
-      res.status(203).send(error)
-  }  
+    res.status(203).send(error)
+  }
 });
 
 // CREATE A COMMENTARY
-router.post("/subject/commentaries", (req,res) => {
+router.post("/subject/commentaries", (req, res) => {
   try {
     let idAuthor = req.body.idAuthor;
     let contained = req.body.contained;
@@ -169,32 +169,32 @@ router.post("/subject/commentaries", (req,res) => {
     // let idCategory = req.body.idCategory;
 
     let sql = `INSERT INTO commentaires (id_auteur, date_commentaires, contenu_commentaires, id_sujet_forum) VALUES('${idAuthor}',NOW(),'${contained}','${idSubject}')`;
-    con.query(sql, (err,result) => {
+    con.query(sql, (err, result) => {
       if (err) throw err;
       res.status(200).send("New commentary added")
     })
 
   } catch (error) {
-      res.status(203).send(error)
+    res.status(203).send(error)
   }
 });
 
 // DELETE A COMMENTARY
-router.delete("/subject/:id/:idCommentary", (req,res) => {
+router.delete("/subject/:id/:idCommentary", (req, res) => {
   try {
     let id = req.params.id;
     let idCommentary = req.params.idCommentary;
     let sql = `DELETE FROM commentaires WHERE commentaires.id_auteur = '${id}' AND id = '${idCommentary}'`;
 
-    con.query(sql, (err,result) => {
+    con.query(sql, (err, result) => {
       if (err) throw err;
-      if (result.length){
+      if (result.length) {
         res.status(200).send("USER COMMENTARY DELETED");
       } else {
         res.status(200).send("THIS COMMENTARY DOES NOT EXIST")
       }
-            
-    });    
+
+    });
   } catch (error) {
     res.status(203).send(error)
   }

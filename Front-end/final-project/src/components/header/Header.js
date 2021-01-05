@@ -1,29 +1,21 @@
 import React from "react";
+import "../../Greentheme.css"
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 function Header() {
+    // THINK TO TOKEN HEADER + FORUM HEADER
 
     return (
         <header className="header">
             <nav className="nav">
-                <Link className="nav_link" to="/">
-                    Home
-            </Link>
-                <Link className="nav_link" to="/productform">
-                    Product Form
-            </Link>
-
-                <Link className="nav_link" to="/cart">
-                    cart
-            </Link>
-                <img
-                    onClick={() => this.imageOnclick()}
-                    src={this.props.signinStore.userInfo.profile_picture}
-                    alt="profil_Picture"
-                />
-                {/* pensez a ajouter le panier */}
-                <button onClick={this.onSignout} className="signout_btn">
+                <Link className="nav_link" to="/">Accueil</Link>
+                <Link className="nav_link" to="/univers">Univers</Link>
+                <Link className="nav_link" to="/forum">Forum</Link>
+                <Link className="nav_link" to="/sign-in">Connexion</Link>
+                <Link className="nav_link" to="/inscription">Inscription</Link>
+                {/* <button onClick={this.onSignout} className="signout_btn">
                     Sign out
-            </button>
+            </button> */}
             </nav>
         </header>
     );

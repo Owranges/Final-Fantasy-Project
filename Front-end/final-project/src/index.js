@@ -5,6 +5,7 @@ import reportWebVitals from './reportWebVitals';
 //COMPONENTS ROUTES
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import App from './App';
+import Signin from './components/signin/Signin';
 
 // STORE + PERSISTANT
 import { Provider } from "react-redux";
@@ -41,8 +42,8 @@ ReactDOM.render(
       <Router>
         <Switch>
           <Route exact path="/" component={App} />
-          {/* <Route path="/signup" component={SignUp} />
-          <Route path="/productform" component={Product_form} />
+          <Route path="/sign-in" component={Signin} />
+          {/* <Route path="/productform" component={Product_form} />
           <Route path="/solo-product" component={SoloProduct} />
           <Route path="/profiluser" component={ProfilUser} />
           <Route path="/edit-product" component={EditProduct} />
