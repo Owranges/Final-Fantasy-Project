@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
-
+import signinReducer from "./SigninReducer";
 const allReducers = combineReducers({
-    a: 'o'
+    signin: signinReducer
 });
 
 export default allReducers;

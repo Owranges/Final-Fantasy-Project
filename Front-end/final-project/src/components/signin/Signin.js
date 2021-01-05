@@ -3,9 +3,12 @@ import "./Signin.css"
 import Header from "../header/Header"
 import Footer from "../footer/Footer"
 import axios from "axios"
+import { connect } from "react-redux";
+import { signinAction } from "../../storeRedux/actions/SigninActions";
+import jwt_decode from "jwt-decode";
 
-function Signin() {
-
+function Signin(props) {
+    const [incorrect, setIncorrect] = useState()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const handleSubmit = (e) => {
@@ -18,14 +21,22 @@ function Signin() {
         }
         axios.post("http://localhost:8000/user/sign-in", formValues)
             .then(response => {
-                console.log(response);
+                if (response.data === "Email or Password is incorrect") {
+                    setIncorrect(false)
+                }
+                else if (response.data.auth) {
+                    let tokenDecoded = jwt_decode(response.data.token);
+                    props.signinAction({ tokenDecoded, token: response.data.token });
+                    // props.history.push("/");
+                }
             }).catch(err => {
                 console.log(err);
             })
     }
 
-
+    console.log(props);
     return (
+
         <div>
             < Header />
             <div className="signin">
@@ -53,4 +64,9 @@ function Signin() {
     );
 }
 
-export default Signin;
+const mapDispatchToProps = { signinAction };
+const mapStateToProps = (state) => ({
+    signinStore: state.signin,
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Signin);
+
