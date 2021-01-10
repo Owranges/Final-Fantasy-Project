@@ -1,3 +1,29 @@
-/* .homeDiv{
-  
-} */
+.homeMsg{
+    color: #6F9584;
+    position: absolute;
+      top: 5%;
+      left: 55%;
+    
+}
+
+.homeDiv{
+    background-color: #181B16;
+    height: 100%;
+    position: relative; left: 0; top: 0;
+}
+.cloudImg{
+    
+    max-width: 25%;
+    height: auto;
+    position: absolute;
+      top: 5%;
+      left: 5%;
+}
+.midgarImg{
+    margin-top:20%;
+    width: 100%;
+    height: auto;
+    position: relative;
+      top: 0;
+      left: 0;
+}

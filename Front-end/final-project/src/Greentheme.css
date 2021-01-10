@@ -4,7 +4,25 @@
     padding: 0;
 }
 
+@font-face {
+    font-family: 'finalf';
+    src: url(./finalf.ttf) format("ttf");
+}
 /* NAVBARD + FOOTER */
+.logoImg{
+    max-width: 5%;
+    height: auto;
+  
+}
+.siteTitle{
+    display: flex;
+    color: #5BFFB5;
+    font-size: 2rem;
+    font-family: 'finalf';
+    align-items: center;
+    justify-content: center;
+    margin-right: 20%;
+}
 .footer{
     display: flex;
     height: 30px;
@@ -13,10 +31,11 @@
     background-color: #1b2625;
     color: #5BFFB5;
     font-size: 0.6em;
+    
 }
 .header {
     background-color: #1b2625;
-    height: 50px;
+    height: 20%;
 }
 .nav{
     display: flex;
