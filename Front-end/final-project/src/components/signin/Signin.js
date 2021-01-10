@@ -34,14 +34,16 @@ function Signin(props) {
             })
     }
 
-    console.log(props);
+    const pushSignup = () => {
+        props.history.push("/sign-up")
+    }
     return (
 
         <div>
             < Header />
             <div className="signin">
                 <p className="signinMsg">Vous ne possédez pas encore de compte</p>
-                <button className="btnGreen"> S'INSCRIRE</button>
+                <button className="btnGreen" onClick={pushSignup}> S'INSCRIRE</button>
             </div>
             <div className="parrallax2"></div>
             <div className="signin">

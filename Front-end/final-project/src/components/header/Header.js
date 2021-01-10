@@ -12,7 +12,7 @@ function Header() {
                 <Link className="nav_link" to="/univers">Univers</Link>
                 <Link className="nav_link" to="/forum">Forum</Link>
                 <Link className="nav_link" to="/sign-in">CONNEXION</Link>
-                <Link className="nav_link" to="/inscription">Inscription</Link>
+                <Link className="nav_link" to="/sign-up">Inscription</Link>
                 {/* <button onClick={this.onSignout} className="signout_btn">
                     Sign out
             </button> */}
