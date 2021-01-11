@@ -5,7 +5,7 @@ const con = require("../database/database");
 let router = express.Router();
 const saltRounds = 10;
 const verif_token = require("../middleware/token");
-const secret = require("../modules/secret")
+const config = require("../modules/config")
 
 //USERS ROUTES
 
@@ -51,7 +51,7 @@ router.post("/user/sign-in", (req, res) => {
             email: result[0].email,
             password: result[0].password,
           },
-          secret
+          config.secret
         );
 
         bcrypt.compare(password, result[0].password).then((resp) => {
