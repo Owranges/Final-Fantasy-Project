@@ -8,7 +8,24 @@ const verif_token = require("../middleware/token");
 const config = require("../modules/config")
 
 //USERS ROUTES
+// GET USER INFO 
 
+router.get("/user/:id", (req, res) => {
+  try {
+    let id = req.params.id
+    let sql = `SELECT * FROM utilisateurs WHERE id = '${id}';`;
+    con.query(sql, (err, result) => {
+      if (err) throw err
+      if (!result.length) {
+        throw "This user Id doesn't exist"
+      } else {
+        res.status(200).send(result)
+      }
+    })
+  } catch (error) {
+    res.status(203).send(error)
+  }
+})
 // ADD AN USER SIGNUP
 router.post("/user/sign-up", (req, res) => {
   try {
@@ -69,25 +86,24 @@ router.post("/user/sign-in", (req, res) => {
 });
 
 // EDIT PROFIL USER
-router.put("/user/edit/:id", verif_token, (req, res) => {
+router.put("/user/edit", verif_token, (req, res) => {
   try {
     let prenom = req.body.prenom;
     let email = req.body.email;
     let password = req.body.password;
     let avatar = req.body.avatar;
     let pseudo = req.body.pseudo;
-    let id = req.params.id;
+    let id = req.body.id;
 
     if (!req.body.prenom || req.body.email == "") throw "please provide prenom"
     if (!req.body.email || req.body.email == "") throw "please provide a email"
     if (!req.body.password || req.body.password == "") throw "please provide a password"
     if (!req.body.avatar || req.body.avatar == "") throw "please provide a avatar"
     if (!req.body.pseudo || req.body.pseudo == "") throw "please provide a pseudo"
-
+    console.log('a');
     let check = `SELECT id FROM utilisateurs WHERE id = '${id}';`;
     con.query(check, (err, result) => {
       if (err) throw err;
-
       if (!result.length) {
         throw "This profil doesn't exist"
       } else {

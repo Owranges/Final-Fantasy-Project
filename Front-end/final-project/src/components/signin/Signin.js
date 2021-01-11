@@ -27,7 +27,7 @@ function Signin(props) {
                 else if (response.data.auth) {
                     let tokenDecoded = jwt_decode(response.data.token);
                     props.signinAction({ tokenDecoded, token: response.data.token });
-                    // props.history.push("/");
+                    // props.history.push("/edit-profile");
                 }
             }).catch(err => {
                 console.log(err);

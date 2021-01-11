@@ -62,4 +62,10 @@
     border: none;
     
   }
+.signout_btn{
+    background-color: #057543 ;
+    color: white;
+    border: none;
+    padding: 0.2%;
+}
 

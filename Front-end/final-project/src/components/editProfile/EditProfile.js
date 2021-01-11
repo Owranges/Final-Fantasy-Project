@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from "axios"
 import "./EditProfile.css"
-import ff7SwordBuster from "../../Img/EditProfileImg/ff7swordbuster.png"
 import Header from "../header/Header"
 import Footer from "../footer/Footer"
+import { connect } from "react-redux";
+import { signinAction } from "../../storeRedux/actions/SigninActions";
 
 function EditProfile(props) {
 
@@ -13,9 +14,33 @@ function EditProfile(props) {
     const [pseudo, setPseudo] = useState('')
     const [firstname, setFirstname] = useState('')
     const [avatar, setAvatar] = useState('')
+    const [infoUser, setInfoUser] = useState([])
     const handleSubmit = (e) => {
         e.preventDefault()
     }
+    const token = props.signinStore.userToken;
+    useEffect(() => {
+
+        if (token) axios.get(`http://localhost:8000/user/${props.signinStore.userInfo.id}`)
+            .then(response => {
+                if (response.data === "This user Id doesn't exist") {
+                    setIncorrect(false)
+                }
+                else if (response.data) {
+                    setInfoUser(response.data[0])
+
+                }
+            }).catch(err => {
+                console.log(err);
+            })
+        else {
+            props.history.push('/')
+        }
+
+
+
+    }, []);
+
     const formSubmit = () => {
         const formValues = {
             email: email,
@@ -23,24 +48,26 @@ function EditProfile(props) {
             pseudo: pseudo,
             prenom: firstname,
             avatar: avatar,
+            id: infoUser.id
         }
-        axios.post("http://localhost:8000//user/edit/:id", formValues)
+        const headers = {
+            "Content-Type": "application/json",
+            authorization: props.signinStore.userToken,
+        };
+        axios.put(`http://localhost:8000/user/edit`, formValues, { headers: headers })
             .then(response => {
-                if (response.data === "This email is already in use") {
+                if (response.data === "This user Id doesn't exist") {
                     setIncorrect(false)
                 }
-                else if (response.data.auth) {
+                else if (response) {
+                    console.log(response);
 
-                    // props.history.push("/");
                 }
             }).catch(err => {
                 console.log(err);
             })
-    }
+    };
 
-    // const pushSignin = () => {
-    //     props.history.push("/sign-in")
-    // }
     return (
         <div >
             < Header />
@@ -52,23 +79,23 @@ function EditProfile(props) {
                     <form onSubmit={handleSubmit} className="formEditProfile">
                         <div className="form-email">
                             <label>Adresse Mail:</label>
-                            <input type="email" name="email" id="email" required onChange={e => setEmail(e.target.value)} />
+                            <input type="email" name="email" id="email" required placeholder={infoUser.email} onChange={e => setEmail(e.target.value)} />
                         </div>
                         <div className="form-password">
                             <label>Mot de passe:</label>
-                            <input type="password" name="password" id="password" required onChange={e => setPassword(e.target.value)} />
+                            <input type="password" name="password" id="password" required placeholder="mot de passe" onChange={e => setPassword(e.target.value)} />
                         </div>
                         <div className="form-pseudo">
                             <label>Pseudo:</label>
-                            <input type="pseudo" name="pseudo" id="pseudo" required onChange={e => setPseudo(e.target.value)} />
+                            <input type="pseudo" name="pseudo" id="pseudo" required placeholder={infoUser.pseudo} onChange={e => setPseudo(e.target.value)} />
                         </div>
                         <div className="form-firstname">
                             <label>Prénom:</label>
-                            <input type="firstname" name="firstname" id="firstname" required onChange={e => setFirstname(e.target.value)} />
+                            <input type="firstname" name="firstname" id="firstname" required placeholder={infoUser.prenom} onChange={e => setFirstname(e.target.value)} />
                         </div>
                         <div className="form-avatar">
                             <label>Image de profil:</label>
-                            <input type="avatar" name="avatar" id="avatar" required onChange={e => setAvatar(e.target.value)} />
+                            <input type="avatar" name="avatar" id="avatar" required placeholder={infoUser.avatar} onChange={e => setAvatar(e.target.value)} />
                         </div>
                     </form>
                     <div className="form-btn">
@@ -77,9 +104,13 @@ function EditProfile(props) {
                 </div>
             </div>
             < Footer />
-
         </div >
     );
 }
 
-export default EditProfile;
+const mapDispatchToProps = { signinAction };
+const mapStateToProps = (state) => ({
+    signinStore: state.signin,
+});
+export default connect(mapStateToProps, mapDispatchToProps)(EditProfile);
+

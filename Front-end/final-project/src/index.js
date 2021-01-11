@@ -47,6 +47,7 @@ ReactDOM.render(
           <Route path="/sign-in" component={Signin} />
           <Route path="/sign-up" component={Signup} />
           <Route path="/edit-profile" component={EditProfile} />
+          <Route patch='*' exact={true} component={App} />
           {/* <Route path="/profiluser" component={ProfilUser} />
           <Route path="/edit-product" component={EditProduct} />
           <Route path="/cart" component={Cart} /> */}
