@@ -12,7 +12,7 @@ const con = mysql.createConnection({
 
 // FUNCTION TO CREATE TABLE IF NOT EXISTS
 function createTableUser() {
-    let myTable = `CREATE TABLE IF NOT EXISTS utilisateurs(
+    const myTable = `CREATE TABLE IF NOT EXISTS utilisateurs(
         id int PRIMARY KEY auto_increment,
         email VARCHAR(255)NOT NULL,
         prenom VARCHAR(255)NOT NULL,
@@ -28,7 +28,7 @@ function createTableUser() {
     });
 }
 function createTableSubjetForum() {
-    let myTable = `CREATE TABLE IF NOT EXISTS sujet_forum(
+    const myTable = `CREATE TABLE IF NOT EXISTS sujet_forum(
         id INT PRIMARY KEY AUTO_INCREMENT,
         id_utilisateur INT NOT NULL,
         FOREIGN KEY (id_utilisateur) REFERENCES utilisateurs(id),
@@ -45,7 +45,7 @@ function createTableSubjetForum() {
 }
 function createTableCategorySubject() {
 
-    let myTable = `CREATE TABLE IF NOT EXISTS catégories_sujet(
+    const myTable = `CREATE TABLE IF NOT EXISTS catégories_sujet(
         id INT PRIMARY KEY AUTO_INCREMENT,
         nom VARCHAR(255) NOT NULL
     )`;
@@ -55,7 +55,7 @@ function createTableCategorySubject() {
     });
 }
 function createTableCommentaries() {
-    let myTable = `CREATE TABLE IF NOT EXISTS commentaires(
+    const myTable = `CREATE TABLE IF NOT EXISTS commentaires(
         id INT PRIMARY KEY AUTO_INCREMENT,
         id_auteur INT NOT NULL,
         FOREIGN KEY (id_auteur) REFERENCES utilisateurs(id),
@@ -72,7 +72,7 @@ function createTableCommentaries() {
 }
 function createTableArticlesAdmin() {
 
-    let myTable = `CREATE TABLE IF NOT EXISTS articles_admin(
+    const myTable = `CREATE TABLE IF NOT EXISTS articles_admin(
         id INT PRIMARY KEY AUTO_INCREMENT,
         date_article DATE NOT NULL,
         contenu_article TEXT(5000)
@@ -85,7 +85,7 @@ function createTableArticlesAdmin() {
 }
 function createTableImageArticles() {
 
-    let myTable = `CREATE TABLE IF NOT EXISTS image_articles(
+    const myTable = `CREATE TABLE IF NOT EXISTS image_articles(
         id INT PRIMARY KEY AUTO_INCREMENT,
         id_article_admin INT,
         FOREIGN KEY (id_article_admin) REFERENCES articles_admin(id),

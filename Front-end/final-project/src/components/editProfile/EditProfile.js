@@ -37,9 +37,9 @@ function Signup(props) {
             })
     }
 
-    const pushSignin = () => {
-        props.history.push("/sign-in")
-    }
+    // const pushSignin = () => {
+    //     props.history.push("/sign-in")
+    // }
     return (
         <div>
             < Header />

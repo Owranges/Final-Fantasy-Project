@@ -5,6 +5,7 @@ const con = require("../database/database");
 let router = express.Router();
 const saltRounds = 10;
 const verif_token = require("../middleware/token");
+const secret = require("../modules/secret")
 
 //USERS ROUTES
 
@@ -50,7 +51,7 @@ router.post("/user/sign-in", (req, res) => {
             email: result[0].email,
             password: result[0].password,
           },
-          "secret"
+          secret
         );
 
         bcrypt.compare(password, result[0].password).then((resp) => {
@@ -77,12 +78,18 @@ router.put("/user/edit/:id", verif_token, (req, res) => {
     let pseudo = req.body.pseudo;
     let id = req.params.id;
 
+    if (!req.body.prenom || req.body.email == "") throw "please provide prenom"
+    if (!req.body.email || req.body.email == "") throw "please provide a email"
+    if (!req.body.password || req.body.password == "") throw "please provide a password"
+    if (!req.body.avatar || req.body.avatar == "") throw "please provide a avatar"
+    if (!req.body.pseudo || req.body.pseudo == "") throw "please provide a pseudo"
+
     let check = `SELECT id FROM utilisateurs WHERE id = '${id}';`;
     con.query(check, (err, result) => {
       if (err) throw err;
 
       if (!result.length) {
-        res.status(200).send("This profil doesn't exist");
+        throw "This profil doesn't exist"
       } else {
         bcrypt.hash(password, saltRounds).then((hash) => {
           let verif = `UPDATE utilisateurs SET prenom = '${prenom}',email = '${email}', password = '${hash}', avatar = '${avatar}', pseudo = '${pseudo}' WHERE utilisateurs.id = '${id}'`;
