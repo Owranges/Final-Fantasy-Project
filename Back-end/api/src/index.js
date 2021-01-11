@@ -4,6 +4,9 @@ const port = 8000;
 const cors = require("cors");
 // const config = require("./modules/config")
 
+const connection = require("./database/database.js");
+connection.connect();
+
 app.use(
     express.urlencoded({
         extended: true,
@@ -25,8 +28,10 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use("/", require("./routes/routes"));
-
+// app.use("/", require("./routes/routes"));
+require('./routes/UserRoutes')(app, connection)
+require('./routes/ForumRoutes')(app, connection)
+require('./routes/AdminRoutes')(app, connection)
 
 app.listen(port, () => {
     console.log(`http://localhost:${port}/`);

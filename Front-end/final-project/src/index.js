@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import reportWebVitals from './reportWebVitals';
+
 //COMPONENTS ROUTES
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import App from './App';
 import Signin from './components/signin/Signin';
 import Signup from './components/signup/Signup';
 import EditProfile from './components/editProfile/EditProfile'
+import Forum from './components/forum/Forum'
 
 // STORE + PERSISTANT
 import { Provider } from "react-redux";
@@ -47,7 +48,8 @@ ReactDOM.render(
           <Route path="/sign-in" component={Signin} />
           <Route path="/sign-up" component={Signup} />
           <Route path="/edit-profile" component={EditProfile} />
-          <Route patch='*' exact={true} component={App} />
+          <Route path="/forum" component={Forum} />
+          <Route path='*' exact={true} component={App} />
           {/* <Route path="/profiluser" component={ProfilUser} />
           <Route path="/edit-product" component={EditProduct} />
           <Route path="/cart" component={Cart} /> */}

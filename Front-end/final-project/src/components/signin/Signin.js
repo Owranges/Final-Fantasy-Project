@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "./Signin.css"
-import Header from "../header/Header"
-import Footer from "../footer/Footer"
+import Header from "../../Global/header/Header"
+import Footer from "../../Global/footer/Footer"
 import axios from "axios"
 import { connect } from "react-redux";
 import { signinAction } from "../../storeRedux/actions/SigninActions";

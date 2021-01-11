@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "../header/Header"
-import Footer from "../footer/Footer"
-import "../../Greentheme.css"
+import Header from "../../Global/header/Header"
+import Footer from "../../Global/footer/Footer"
+import "../../themeColor/Greentheme.css"
 import "./Home.css"
 import ff7cloudprofile from "../../Img/HomeImg/ff7cloudprofile.png"
 import ff7midgar from "../../Img/HomeImg/ff7midgar.jpg"

@@ -6,7 +6,7 @@
 
 @font-face {
     font-family: 'finalf';
-    src: url(./finalf.ttf) format("ttf");
+    src: url(../font/finalf.ttf) format("ttf");
 }
 /* NAVBARD + FOOTER */
 .logoImg{
@@ -31,7 +31,7 @@
     flex-direction: row;
     justify-content: space-around;
     background-color: #1b2625;
-    color: #5BFFB5;
+    
     font-size: 0.6em;
     
 }
@@ -69,3 +69,6 @@
     padding: 0.2%;
 }
 
+/* .lol{
+    color: red;
+} */

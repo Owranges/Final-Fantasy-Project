@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios"
 import "./EditProfile.css"
-import Header from "../header/Header"
-import Footer from "../footer/Footer"
+import Header from "../../Global/header/Header"
+import Footer from "../../Global/footer/Footer"
 import { connect } from "react-redux";
 import { signinAction } from "../../storeRedux/actions/SigninActions";
 
@@ -19,26 +19,27 @@ function EditProfile(props) {
         e.preventDefault()
     }
     const token = props.signinStore.userToken;
-    useEffect(() => {
 
-        if (token) axios.get(`http://localhost:8000/user/${props.signinStore.userInfo.id}`)
+    const getUserInfo = () => {
+        axios.get(`http://localhost:8000/user/${props.signinStore.userInfo.id}`)
             .then(response => {
                 if (response.data === "This user Id doesn't exist") {
                     setIncorrect(false)
                 }
                 else if (response.data) {
                     setInfoUser(response.data[0])
-
                 }
             }).catch(err => {
                 console.log(err);
             })
+    };
+
+    useEffect(() => {
+
+        if (token) getUserInfo()
         else {
             props.history.push('/')
         }
-
-
-
     }, []);
 
     const formSubmit = () => {
@@ -72,7 +73,7 @@ function EditProfile(props) {
         <div >
             < Header />
             <div className="editProfileDiv" >
-                <div className="editProfile">
+                <div >
                     <p className="editProfileMsg">Vous pouvez modifier les informations de profil</p>
                 </div>
                 <div className="editProfile">
@@ -98,7 +99,7 @@ function EditProfile(props) {
                             <input type="avatar" name="avatar" id="avatar" required placeholder={infoUser.avatar} onChange={e => setAvatar(e.target.value)} />
                         </div>
                     </form>
-                    <div className="form-btn">
+                    <div className="forms-btn">
                         <button className="btnGreen" onClick={formSubmit}>VALIDER   </button>
                     </div>
                 </div>

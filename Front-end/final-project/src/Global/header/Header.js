@@ -1,5 +1,5 @@
 import React from "react";
-import "../../Greentheme.css"
+import "../../themeColor/Greentheme.css"
 import fflogo from '../../Img/HeaderImg/FFVIILogo.png';
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";

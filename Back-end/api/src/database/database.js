@@ -1,7 +1,7 @@
 const mysql = require("mysql2");
 // require("dotenv").config();
 
-const con = mysql.createConnection({
+const connection = mysql.createConnection({
     host: "127.0.0.1",
     user: "root",
     password: "",
@@ -22,7 +22,7 @@ function createTableUser() {
         administ BOOLEAN
     )`;
 
-    con.query(myTable, (err, results, fields) => {
+    connection.query(myTable, (err, results, fields) => {
         if (err) throw err;
         console.log('is k');
     });
@@ -38,7 +38,7 @@ function createTableSubjetForum() {
         FOREIGN KEY (id_catégories_sujet) REFERENCES catégories_sujet(id)
     )`;
 
-    con.query(myTable, (err, results, fields) => {
+    connection.query(myTable, (err, results, fields) => {
         if (err) throw err;
         console.log('is k');
     });
@@ -49,7 +49,7 @@ function createTableCategorySubject() {
         id INT PRIMARY KEY AUTO_INCREMENT,
         nom VARCHAR(255) NOT NULL
     )`;
-    con.query(myTable, (err, results, fields) => {
+    connection.query(myTable, (err, results, fields) => {
         if (err) throw err;
         console.log('is k');
     });
@@ -65,7 +65,7 @@ function createTableCommentaries() {
         FOREIGN KEY (id_sujet_forum) REFERENCES sujet_forum(id)
     )`;
 
-    con.query(myTable, (err, results, fields) => {
+    connection.query(myTable, (err, results, fields) => {
         if (err) throw err;
         console.log('is k');
     });
@@ -78,7 +78,7 @@ function createTableArticlesAdmin() {
         contenu_article TEXT(5000)
     )`;
 
-    con.query(myTable, (err, results, fields) => {
+    connection.query(myTable, (err, results, fields) => {
         if (err) throw err;
         console.log('is k');
     });
@@ -92,12 +92,12 @@ function createTableImageArticles() {
         image VARCHAR(250) NOT NULL
     )`;
 
-    con.query(myTable, (err, results, fields) => {
+    connection.query(myTable, (err, results, fields) => {
         if (err) throw err;
         console.log('is k');
     });
 }
-con.connect((err) => {
+connection.connect((err) => {
     if (err) throw err;
     console.log("Well connected");
     createTableUser();
@@ -108,4 +108,4 @@ con.connect((err) => {
     createTableImageArticles();
 });
 
-module.exports = con
+module.exports = connection

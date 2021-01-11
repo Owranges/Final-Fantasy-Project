@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import axios from "axios"
 import "./Signup.css"
-import Header from "../header/Header"
-import Footer from "../footer/Footer"
+import Header from "../../Global/header/Header"
+import Footer from "../../Global/footer/Footer"
 
 function Signup(props) {
 
@@ -29,8 +29,7 @@ function Signup(props) {
                     setIncorrect(false)
                 }
                 else if (response.data.auth) {
-
-                    // props.history.push("/");
+                    props.history.push("/sign-in");
                 }
             }).catch(err => {
                 console.log(err);

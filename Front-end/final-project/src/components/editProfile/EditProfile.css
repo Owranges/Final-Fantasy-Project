@@ -13,16 +13,20 @@
 .editProfile{
     display: flex;
     height: 100%;
-    padding: 1% 0%;
-    /* justify-content: center; */
-    /* align-items: center; */
+    padding-left: 5%;
+    padding-top: 1%;
     flex-direction: column;
-    /* background-color: #181B16; */
     color: #6F9584 ;
+    opacity: 0.9;
 }
 
 .editProfileMsg{
-   padding-left: 3%;
+    
+    display: flex;
+    height: 100%;
+    padding: 1% 0% 0% 7%;
+    flex-direction: column;
+    color: #6F9584 ;
 }
 
 .formEditProfile{
@@ -48,7 +52,7 @@
     align-self: flex-start;
 }
 
-.form-btn{
+.forms-btn{
     padding-top: 1%;
     padding-left: 9%;
 }
