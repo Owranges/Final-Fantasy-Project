@@ -21,13 +21,15 @@
     font-family: 'finalf';
     align-items: center;
     justify-content: center;
-    margin-right: 20%;
+    position: relative;
+    width: auto;
 }
 .footer{
-    display: flex;
-    height: 30px;
+    /* display: flex; */
+    min-height: auto;
+    height: 35px;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     background-color: #1b2625;
     color: #5BFFB5;
     font-size: 0.6em;
