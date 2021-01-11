@@ -6,7 +6,7 @@
 .homeDiv{
   
   background-color: #181B16;
-  height: 100%;
+  min-height: calc(100vh - 35px);
   position: relative; left: 0; top: 0;
 }
 .homeMsgDiv{

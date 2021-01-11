@@ -15,6 +15,7 @@ function Header() {
                 <Link className="nav_link" to="/forum">FORUM</Link>
                 <Link className="nav_link" to="/sign-in">CONNEXION</Link>
                 <Link className="nav_link" to="/sign-up">INSCRIPTION</Link>
+                <Link className="nav_link" to="/edit-profile">PROFIL</Link>
                 {/* <button onClick={this.onSignout} className="signout_btn">
                     Sign out
             </button> */}

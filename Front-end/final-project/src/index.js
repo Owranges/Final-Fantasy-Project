@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import App from './App';
 import Signin from './components/signin/Signin';
 import Signup from './components/signup/Signup';
+import EditProfile from './components/editProfile/EditProfile'
 
 // STORE + PERSISTANT
 import { Provider } from "react-redux";
@@ -45,8 +46,8 @@ ReactDOM.render(
           <Route exact path="/" component={App} />
           <Route path="/sign-in" component={Signin} />
           <Route path="/sign-up" component={Signup} />
-          {/* <Route path="/solo-product" component={SoloProduct} />
-          <Route path="/profiluser" component={ProfilUser} />
+          <Route path="/edit-profile" component={EditProfile} />
+          {/* <Route path="/profiluser" component={ProfilUser} />
           <Route path="/edit-product" component={EditProduct} />
           <Route path="/cart" component={Cart} /> */}
         </Switch>

@@ -67,7 +67,7 @@ function Signup(props) {
                         <input type="firstname" name="firstname" id="firstname" required onChange={e => setFirstname(e.target.value)} />
                     </div>
                     <div className="form-avatar">
-                        <label>Avatar:</label>
+                        <label>Image de profil:</label>
                         <input type="avatar" name="avatar" id="avatar" required onChange={e => setAvatar(e.target.value)} />
                     </div>
                     <div className="form-btn">
