@@ -1,5 +1,33 @@
 import React from "react";
+<<<<<<< HEAD:Front-end/final-project/src/components/header/Header.js
 import "../../Greentheme.css"
+<<<<<<< HEAD
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
+function Header() {
+    // THINK TO TOKEN HEADER + FORUM HEADER
+
+    return (
+        <header className="header">
+            <nav className="nav">
+                <Link className="nav_link" to="/">ACCUEIL</Link>
+                <Link className="nav_link" to="/univers">Univers</Link>
+                <Link className="nav_link" to="/forum">Forum</Link>
+                <Link className="nav_link" to="/sign-in">CONNEXION</Link>
+                <Link className="nav_link" to="/inscription">Inscription</Link>
+                {/* <button onClick={this.onSignout} className="signout_btn">
+                    Sign out
+            </button> */}
+            </nav>
+        </header>
+    );
+}
+
+export default Header;
+=======
+=======
+import "../../themeColor/Greentheme.css"
+>>>>>>> 5dd1c27f78c58a008c75f4fd3062b9c49b068f3b:Front-end/final-project/src/Global/header/Header.js
 import fflogo from '../../Img/HeaderImg/FFVIILogo.png';
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
@@ -50,3 +78,7 @@ const mapStateToProps = (state) => ({
 });
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Header));
 
+<<<<<<< HEAD:Front-end/final-project/src/components/header/Header.js
+>>>>>>> 2f5cad6076b5d087975015f9060a3943b297ab37
+=======
+>>>>>>> 5dd1c27f78c58a008c75f4fd3062b9c49b068f3b:Front-end/final-project/src/Global/header/Header.js

@@ -2,7 +2,18 @@ const express = require("express");
 const app = express();
 const port = 8000;
 const cors = require("cors");
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+=======
 // const config = require("./modules/config")
+>>>>>>> 2f5cad6076b5d087975015f9060a3943b297ab37
+=======
+// const config = require("./modules/config")
+
+const connection = require("./database/database.js");
+connection.connect();
+>>>>>>> 5dd1c27f78c58a008c75f4fd3062b9c49b068f3b
 
 app.use(
     express.urlencoded({
@@ -25,8 +36,10 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use("/", require("./routes/routes"));
-
+// app.use("/", require("./routes/routes"));
+require('./routes/UserRoutes')(app, connection)
+require('./routes/ForumRoutes')(app, connection)
+require('./routes/AdminRoutes')(app, connection)
 
 app.listen(port, () => {
     console.log(`http://localhost:${port}/`);

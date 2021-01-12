@@ -1,0 +1,105 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+}
+
+<<<<<<< HEAD:Front-end/final-project/src/Greentheme.css
+<<<<<<< HEAD
+/* NAVBARD + FOOTER */
+.footer{
+    display: flex;
+    height: 30px;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #1b2625;
+    color: #5BFFB5;
+    font-size: 0.6em;
+}
+.header {
+    background-color: #1b2625;
+    height: 50px;
+=======
+=======
+>>>>>>> 5dd1c27f78c58a008c75f4fd3062b9c49b068f3b:Front-end/final-project/src/themeColor/Greentheme.css
+@font-face {
+    font-family: 'finalf';
+    src: url(../font/finalf.ttf) format("ttf");
+}
+/* NAVBARD + FOOTER */
+.logoImg{
+    max-width: 5%;
+    height: auto;
+  
+}
+.siteTitle{
+    display: flex;
+    color: #5BFFB5;
+    font-size: 2rem;
+    font-family: 'finalf';
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: auto;
+}
+.footer{
+    /* display: flex; */
+    min-height: auto;
+    height: 35px;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: #1b2625;
+    
+    font-size: 0.6em;
+    
+}
+.header {
+    background-color: #1b2625;
+    height: 20%;
+<<<<<<< HEAD:Front-end/final-project/src/Greentheme.css
+>>>>>>> 2f5cad6076b5d087975015f9060a3943b297ab37
+=======
+>>>>>>> 5dd1c27f78c58a008c75f4fd3062b9c49b068f3b:Front-end/final-project/src/themeColor/Greentheme.css
+}
+.nav{
+    display: flex;
+    height: inherit;
+    justify-content: space-around;
+    align-items: center;
+}
+.nav a:link {
+    color: #5BFFB5;
+    text-decoration: none
+}
+.nav a:visited {
+    color: #5BFFB5;
+}
+
+/* BUTTON */
+.btnGreen{
+    background-color: #057543 ;
+    width: 100px;
+    height: 25px;
+    color: white;
+    border: none;
+    
+  }
+<<<<<<< HEAD:Front-end/final-project/src/Greentheme.css
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 5dd1c27f78c58a008c75f4fd3062b9c49b068f3b:Front-end/final-project/src/themeColor/Greentheme.css
+.signout_btn{
+    background-color: #057543 ;
+    color: white;
+    border: none;
+    padding: 0.2%;
+}
+<<<<<<< HEAD:Front-end/final-project/src/Greentheme.css
+>>>>>>> 2f5cad6076b5d087975015f9060a3943b297ab37
+=======
+>>>>>>> 5dd1c27f78c58a008c75f4fd3062b9c49b068f3b:Front-end/final-project/src/themeColor/Greentheme.css
+
+/* .lol{
+    color: red;
+} */

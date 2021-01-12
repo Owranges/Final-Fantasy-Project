@@ -6,7 +6,7 @@
 
 @font-face {
     font-family: 'finalf';
-    src: url(./finalf.ttf) format("ttf");
+    src: url(../font/finalf.ttf) format("ttf");
 }
 /* NAVBARD + FOOTER */
 .logoImg{
@@ -47,7 +47,7 @@
 }
 .nav a:link {
     color: #5BFFB5;
-    text-decoration: none
+    text-decoration: none;
 }
 .nav a:visited {
     color: #5BFFB5;
@@ -68,4 +68,3 @@
     border: none;
     padding: 0.2%;
 }
-
